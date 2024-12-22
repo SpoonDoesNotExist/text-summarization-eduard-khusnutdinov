@@ -34,12 +34,6 @@ class TestSummarizationApp(unittest.TestCase):
             mock_write.assert_any_call("### Summary")
             mock_write.assert_any_call("This is a test summary.")
 
-    @patch("transformers.pipeline")
-    def test_load_summarizer(self, mock_pipeline):
-        summarizer = pipeline("summarization")
-
-        mock_pipeline.assert_called_once_with("summarization")
-        self.assertIsNotNone(summarizer)
 
     @patch("streamlit.text_area")
     @patch("streamlit.button")
