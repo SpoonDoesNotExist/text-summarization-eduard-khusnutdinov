@@ -9,7 +9,6 @@ class TestSummarizationApp(unittest.TestCase):
     @patch("streamlit.spinner")
     @patch("streamlit.success")
     @patch("streamlit.write")
-    @patch("streamlit.error")
     @patch("transformers.pipeline")
     def test_generate_summary(self, mock_pipeline, mock_error, mock_write, mock_success, mock_spinner, mock_button, mock_text_area):
 
@@ -34,7 +33,6 @@ class TestSummarizationApp(unittest.TestCase):
 
     @patch("streamlit.text_area")
     @patch("streamlit.button")
-    @patch("streamlit.error")
     def test_empty_input(self, mock_error, mock_button, mock_text_area):
 
         mock_button.return_value = True
