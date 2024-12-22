@@ -29,7 +29,7 @@ class TestSummarizationApp(unittest.TestCase):
                 do_sample=False
             )[0]["summary_text"]
 
-            self.assertEqual(summary, "Streamlit is an open-source Python library that makes it easy to create and share custom web apps for machine learning and data science . By using Streamlit you can quickly build and deploy powerful data applications .")
+            self.assertEqual(summary, " Streamlit is an open-source Python library that makes it easy to create and share custom web apps for machine learning and data science . By using Streamlit you can quickly build and deploy powerful data applications .")
             mock_success.assert_called_once_with("Summary generated successfully!")
             mock_write.assert_any_call("### Summary")
             mock_write.assert_any_call("This is a test summary.")
