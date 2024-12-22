@@ -9,6 +9,7 @@ class TestSummarizationApp(unittest.TestCase):
     @patch("streamlit.spinner")
     @patch("streamlit.success")
     @patch("streamlit.write")
+    @patch("streamlit.error")
     @patch("transformers.pipeline")
     def test_generate_summary(self, mock_pipeline, mock_error, mock_write, mock_success, mock_spinner, mock_button, mock_text_area):
 
@@ -33,13 +34,19 @@ class TestSummarizationApp(unittest.TestCase):
 
     @patch("streamlit.text_area")
     @patch("streamlit.button")
-    def test_empty_input(self, mock_error, mock_button, mock_text_area):
+    @patch("streamlit.error")
+    @patch("streamlit.spinner")
+    @patch("streamlit.write")
+    def test_empty_input(self, mock_write, mock_spinner, mock_error, mock_button, mock_text_area):
 
         mock_button.return_value = True
         mock_text_area.return_value = ""
 
         with patch("streamlit.cache_resource", lambda func: func):
-            pipeline("summarization")
+            import streamlit_app
+            streamlit_app.input_text = mock_text_area.return_value
+            streamlit_app.st.button("Generate Summary")
+
             mock_error.assert_called_once_with("Please enter some text to summarize.")
 
 if __name__ == "__main__":
