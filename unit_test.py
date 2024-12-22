@@ -21,9 +21,7 @@ class TestSummarizationApp(unittest.TestCase):
         mock_pipeline.return_value = mock_summarizer
 
         with patch("streamlit.cache_resource", lambda func: func):
-            from streamlit_app import load_summarizer
-
-            summarizer = load_summarizer()
+            summarizer = pipeline("summarization")
             summary = summarizer(
                 "Streamlit is an open-source Python library that makes it easy to create and share custom web apps for machine learning and data science. By using Streamlit you can quickly build and deploy powerful data applications. For more information about the open-source library, see the Streamlit Library documentation.",
                 max_length=130,
@@ -38,10 +36,7 @@ class TestSummarizationApp(unittest.TestCase):
 
     @patch("transformers.pipeline")
     def test_load_summarizer(self, mock_pipeline):
-
-        from streamlit_app import load_summarizer
-
-        summarizer = load_summarizer()
+        summarizer = pipeline("summarization")
 
         mock_pipeline.assert_called_once_with("summarization")
         self.assertIsNotNone(summarizer)
@@ -55,9 +50,7 @@ class TestSummarizationApp(unittest.TestCase):
         mock_text_area.return_value = ""
 
         with patch("streamlit.cache_resource", lambda func: func):
-            from your_module import load_summarizer
-
-            load_summarizer() 
+            pipeline("summarization")
             mock_error.assert_called_once_with("Please enter some text to summarize.")
 
 if __name__ == "__main__":
