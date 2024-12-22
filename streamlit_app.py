@@ -2,20 +2,16 @@ import streamlit as st
 from transformers import pipeline
 import time
 
-
 @st.cache_resource
 def load_summarizer():
     return pipeline("summarization")
 
 summarizer = load_summarizer()
 
-
 st.title("Text Summarization App")
 st.write("Enter text in the field below to generate a summary.")
 
-
 input_text = st.text_area("Input Text", height=200)
-
 
 if st.button("Generate Summary"):
     if input_text.strip():
