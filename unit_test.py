@@ -21,7 +21,7 @@ class TestSummarizationApp(unittest.TestCase):
         mock_pipeline.return_value = mock_summarizer
 
         with patch("streamlit.cache_resource", lambda func: func):
-            from your_module import load_summarizer
+            from streamlit_app import load_summarizer
 
             summarizer = load_summarizer()
             summary = summarizer(
@@ -39,7 +39,7 @@ class TestSummarizationApp(unittest.TestCase):
     @patch("transformers.pipeline")
     def test_load_summarizer(self, mock_pipeline):
 
-        from your_module import load_summarizer
+        from streamlit_app import load_summarizer
 
         summarizer = load_summarizer()
 
